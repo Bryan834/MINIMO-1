@@ -7,7 +7,6 @@ import edu.upc.dsa.classes.Partida;
 import edu.upc.dsa.classes.Usuario;
 import org.apache.log4j.Logger;
 
-import javax.servlet.http.Part;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -48,32 +47,10 @@ public class exampleManagerImpl implements exampleManager{
         return this.lUsuarios.values().stream().collect(Collectors.toList());
     }
 
-    public Usuario addUser(String mail, String name, String contra) {
-        logger.info("Creating a new user: " + name);
-        try{
-            getUsuario(mail);
-            logger.info("Correo/identificador ya en uso!");
-        }catch (usuarioNoExisteException e){
-            Usuario u = new Usuario(mail, name, contra);
-            lUsuarios.put(mail, u);
-            logger.info("Usuario creado con exito!");
-            return u;
-        }
-        return null;
-    }
 
-    public Usuario addUser(Usuario u) {
-        logger.info("Creating a new user: " + u.getNombre());
-        try{
-            getUsuario(u.getMail());
-            logger.info("Correo ya en uso!");
-            return null;
-        }catch (usuarioNoExisteException e){
-            lUsuarios.put(u.getMail(), u);
-            logger.info("Usuario creado con exito!");
-            return u;
-        }
-    }
+
+
+
 
     @Override
     public int sizeUsuarios() {
@@ -99,19 +76,70 @@ public class exampleManagerImpl implements exampleManager{
     public Juego addJuego(Juego j) {
         return null;
     }
+
     @Override
-    public List<Partida> sortUsuarios(){
-        lUsuarios.sort((Usuario o1, Usuario o2) -> Integer.compare(o1.getPuntos(),(o2.getPuntos())));
-        for(Partida partida : lPartidas){
-            logger.info("Usuario " + Usuario.getNombre() + " - Puntos " + Partida.getPuntos());
+    public void addPartida(String id,String nombreJuego ,String nombrej, String fecha) {
+
+    }
+
+    public Usuario getUser(String mail) throws usuarioNoExisteException{
+        if(lUsuarios.get(mail) == null){
+            throw new usuarioNoExisteException();
         }
-        return lPartidas;
+        return lUsuarios.get(mail);
+    }
+    @Override
+    public Usuario addUser(String mail, String nombre, String contra) {
+        logger.info("Creating a new user: " + nombre);
+        try{
+            getUser(mail);
+            logger.info("Correo ya en uso!");
+        }catch (usuarioNoExisteException e){
+            Usuario u = new Usuario(mail, nombre, contra);
+            lUsuarios.put(mail, u);
+            logger.info("Usuario creado con exito!");
+            return u;
+        }
+
+        return null;
     }
 
 
     @Override
-    public int getPuntos();
+    public List<Partida> sortUsuarios(){
+        //lUsuarios.sort((Usuario o1, Usuario o2) -> Integer.compare(o1.getPuntos(),(o2.getPuntos())));
+        for(Partida partida : lPartidas){
+            try {
+                logger.info("Usuario " + Usuario.class.newInstance().getNombre() + " - Puntos " + Partida.getPuntos());
+            } catch (InstantiationException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return lPartidas;
+    }
 
+    @Override
+    public Usuario addUser(Usuario u) {
+        return null;
+    }
+
+
+    @Override
+    public int getPuntos() {
+        return 0;
+    }
+
+
+    public Object getPartida(String nombreJuego) throws exampleNoExisteException {
+        return null;
+    }
+
+
+    public int getNivel() {
+        return 0;
+    }
 
 
 }

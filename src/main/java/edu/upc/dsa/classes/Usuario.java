@@ -26,6 +26,15 @@ public class Usuario{
         this.setPartidas();
     }
 
+
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.mail = mail;
+    }
     public HashMap<String, Partida> getPartidas() {
         return partidas;
     }
@@ -50,13 +59,7 @@ public class Usuario{
         this.mail = mail;
     }
 
-    public static String getNombre() {
-        return nombre;
-    }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public String getContra() {
         return contra;

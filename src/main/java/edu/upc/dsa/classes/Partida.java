@@ -2,27 +2,26 @@ package edu.upc.dsa.classes;
 
 import edu.upc.dsa.util.idGenerator;
 
-import javax.servlet.http.Part;
-
 public class Partida {
 
     Partida partida;
 
     String id;
     String nombrej;
-
+    String nombreJuego;
     String idjugador;
 
     int puntos;
 
     String fecha;
 
-    public Partida(){}
+    public Partida(Object candy_crush){}
 
-    public Partida(String id, String nombrej, String fecha) {
+    public Partida(String id, String nombrej,String nombreJuego, String fecha) {
         this.setId(idGenerator.getId());
         this.setIdjugador(idjugador);
         this.setNombrej(nombrej);
+        this.setNombreJuego(nombreJuego);
         this.setFecha(fecha);
         this.puntos= partida.puntos;
     }
@@ -44,7 +43,12 @@ public class Partida {
     public void setNombrej(String nombrej) {
         this.nombrej = nombrej;
     }
-
+    public String getNombreJuego() {
+        return nombreJuego;
+    }
+    public void setNombreJuego(String nombreJuego) {
+        this.nombreJuego = nombreJuego;
+    }
     public String getIdjugador() {
         return idjugador;
     }
